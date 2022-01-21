@@ -4,3 +4,4 @@ npm-debug.log*
 /vue-better-picker
 yarn.lock
 package-lock.json
+yarn-error.log

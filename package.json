@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "node build/server.js",
-    "compile": "node build/compile.js && npm publish ./vue-better-picker"
+    "compile": "node build/compile.js && npm publish ./vue-better-picker",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "author": "shingo.sasaki",
   "license": "MIT",
@@ -39,14 +41,21 @@
     "uglifyjs-webpack-plugin": "^0.3.1",
     "url-loader": "^0.5.8",
     "vue": "^2.2.6",
-    "vue-loader": "^11.3.3",
     "vue-router": "^2.3.0",
     "vue-template-compiler": "^2.2.6",
-    "webpack": "^2.3.2",
     "webpack-dev-middleware": "^1.10.1",
     "webpack-hot-middleware": "^2.17.1"
   },
   "devDependencies": {
-    "prettier": "^2.5.1"
+    "@babel/core": "^7.16.10",
+    "@babel/preset-env": "^7.16.11",
+    "@storybook/addon-controls": "^6.4.0",
+    "@storybook/builder-webpack5": "^6.4.0",
+    "@storybook/manager-webpack5": "^6.4.0",
+    "@storybook/vue": "^6.4.0",
+    "core-js": "^3.20.3",
+    "prettier": "^2.5.1",
+    "vue-loader": "^15.9.8",
+    "webpack": "^5.67.0"
   }
 }

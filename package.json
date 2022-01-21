@@ -1,13 +1,13 @@
 {
   "name": "vue-better-picker",
-  "version": "1.0.3",
-  "description": "",
+  "version": "0.0.1",
+  "description": "Vue picker component for mobile",
   "main": "index.js",
   "scripts": {
     "dev": "node build/server.js",
     "compile": "node build/compile.js && npm publish ./vue-better-picker"
   },
-  "author": "songhao",
+  "author": "shingo.sasaki",
   "license": "MIT",
   "dependencies": {
     "babel-core": "^6.24.0",

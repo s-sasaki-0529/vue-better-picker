@@ -2,3 +2,5 @@
 node_modules/
 npm-debug.log*
 /vue-better-picker
+yarn.lock
+package-lock.json

@@ -3,6 +3,11 @@ const { VueLoaderPlugin } = require("vue-loader");
 module.exports = {
   mode: "production",
   entry: "./src/index.js",
+  output: {
+    library: {
+      type: "commonjs2",
+    },
+  },
   module: {
     rules: [
       {

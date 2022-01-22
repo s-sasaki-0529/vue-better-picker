@@ -107,6 +107,7 @@ export default {
         if (this.pickerSelectedVal[i] !== value) {
           changed = true;
         }
+        this.pickerSelectedVal[i] = this.pickerData[i][index].value;
         this.pickerSelectedText[i] = this.pickerData[i][index].text;
       }
       this.$emit(

@@ -39,24 +39,24 @@ const commonProps = {
   confirmTxt: "confirm",
 };
 
-export const Single = Template.bind({});
-Single.args = {
+export const _1_Single = Template.bind({});
+_1_Single.args = {
   ...commonProps,
   title: "single",
   data: [commonData],
   selectedIndex: [4],
 };
 
-export const Double = Template.bind({});
-Double.args = {
+export const _2_Double = Template.bind({});
+_2_Double.args = {
   ...commonProps,
   title: "double",
   data: [commonData, commonData],
   selectedIndex: [3, 4],
 };
 
-export const Triple = Template.bind({});
-Triple.args = {
+export const _3_Triple = Template.bind({});
+_3_Triple.args = {
   ...commonProps,
   title: "triple",
   data: [commonData, commonData, commonData],

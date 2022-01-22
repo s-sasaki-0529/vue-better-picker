@@ -4,6 +4,7 @@
   "description": "Mobile picker component for Vue 3",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint --ext .js,.ts,.vue src/**",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },

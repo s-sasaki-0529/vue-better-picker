@@ -5,5 +5,9 @@ module.exports = {
     es2021: true,
   },
   plugins: ["vue"],
-  extends: ["eslint:recommended", "plugin:vue/vue3-recommended"],
+  extends: [
+    "eslint:recommended",
+    "plugin:vue/vue3-recommended",
+    "eslint-config-prettier",
+  ],
 };

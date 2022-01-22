@@ -24,15 +24,9 @@ const Template = (args, { argTypes }) => ({
   },
 });
 
-const commonData = [
-  { text: "AAA", value: "aaa" },
-  { text: "BBB", value: "bbb" },
-  { text: "CCC", value: "ccc" },
-  { text: "DDD", value: "ddd" },
-  { text: "EEE", value: "eee" },
-  { text: "FFF", value: "fff" },
-  { text: "GGG", value: "ggg" },
-];
+const commonData = "abcdefghijklmnopqrstuvwxyz"
+  .split("")
+  .map((char) => ({ value: char, text: char.toUpperCase() }));
 
 const commonProps = {
   cancelTxt: "cancel",
@@ -44,7 +38,7 @@ _1_Single.args = {
   ...commonProps,
   title: "single",
   data: [commonData],
-  selectedIndex: [4],
+  selectedIndex: [12],
 };
 
 export const _2_Double = Template.bind({});
@@ -52,7 +46,7 @@ _2_Double.args = {
   ...commonProps,
   title: "double",
   data: [commonData, commonData],
-  selectedIndex: [3, 4],
+  selectedIndex: [13, 14],
 };
 
 export const _3_Triple = Template.bind({});
@@ -60,5 +54,5 @@ _3_Triple.args = {
   ...commonProps,
   title: "triple",
   data: [commonData, commonData, commonData],
-  selectedIndex: [2, 3, 4],
+  selectedIndex: [12, 13, 14],
 };

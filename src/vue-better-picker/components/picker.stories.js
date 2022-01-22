@@ -1,14 +1,16 @@
 import picker from "./picker.vue";
 export default { title: "picker", component: picker };
 
-const Template = (args, { argTypes }) => ({
+const Template = (args) => ({
   components: { picker },
-  props: Object.keys(argTypes),
+  setup() {
+    return { args };
+  },
   template: `
     <div>
-      <button @click="show">show</button>
+      <button @click="show">Show</button>
       <pre v-if="state">{{ state }}</pre>
-      <picker ref="picker" @select="(...args) => state = args" v-bind="$props" />
+      <picker ref="picker" @select="(...result) => state = result" v-bind="args" />
     </div>
   `,
   data: () => ({

@@ -1,27 +1,29 @@
 <template>
   <transition name="picker-fade">
-    <div class="picker" v-show="state === 1" @touchmove.prevent @click="cancel">
+    <div v-show="state === 1" class="picker" @touchmove.prevent @click="cancel">
       <transition name="picker-move">
-        <div class="picker-panel" v-show="state === 1" @click.stop>
+        <div v-show="state === 1" class="picker-panel" @click.stop>
           <div class="picker-choose border-bottom-1px">
             <span class="cancel" @click="cancel">{{ cancelTxt }}</span>
             <span class="confirm" @click="confirm">{{ confirmTxt }}</span>
-            <h1 class="picker-title">{{ title }}</h1>
+            <h1 class="picker-title">
+              {{ title }}
+            </h1>
           </div>
           <div class="picker-content">
-            <div class="mask-top border-bottom-1px"></div>
-            <div class="mask-bottom border-top-1px"></div>
-            <div class="wheel-wrapper" ref="wheelWrapper">
-              <div class="wheel" v-for="data in pickerData">
+            <div class="mask-top border-bottom-1px" />
+            <div class="mask-bottom border-top-1px" />
+            <div ref="wheelWrapper" class="wheel-wrapper">
+              <div v-for="(dataSet, i) in pickerData" :key="i" class="wheel">
                 <ul class="wheel-scroll">
-                  <li v-for="item in data" class="wheel-item">
+                  <li v-for="(item, s) in dataSet" :key="s" class="wheel-item">
                     {{ item.text }}
                   </li>
                 </ul>
               </div>
             </div>
           </div>
-          <div class="picker-footer"></div>
+          <div class="picker-footer" />
         </div>
       </transition>
     </div>
@@ -51,6 +53,7 @@ export default {
     },
     title: {
       type: String,
+      required: true,
     },
     cancelTxt: {
       type: String,
@@ -79,6 +82,11 @@ export default {
       pickerSelectedVal: [],
       pickerSelectedText: [],
     };
+  },
+  watch: {
+    data(newData) {
+      this.setData(newData);
+    },
   },
   created() {
     if (!this.pickerSelectedIndex.length) {
@@ -214,7 +222,7 @@ export default {
     },
     refresh() {
       setTimeout(() => {
-        this.wheels.forEach((wheel, index) => {
+        this.wheels.forEach((wheel) => {
           wheel.refresh();
         });
       }, 200);
@@ -241,11 +249,6 @@ export default {
       return this.wheels.every((wheel) => {
         return !wheel.isInTransition;
       });
-    },
-  },
-  watch: {
-    data(newData) {
-      this.setData(newData);
     },
   },
 };

@@ -23,6 +23,8 @@
     "babel-loader": "^8.2.3",
     "core-js": "^3.20.3",
     "css-loader": "^6.5.1",
+    "eslint": "^8.7.0",
+    "eslint-plugin-vue": "^8.3.0",
     "postcss-loader": "^6.2.1",
     "prettier": "^2.5.1",
     "style-loader": "^3.3.1",

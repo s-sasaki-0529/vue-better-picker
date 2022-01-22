@@ -1,6 +1,6 @@
 {
   "name": "vue-3-better-picker",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Mobile picker component for Vue 3",
   "main": "dist/main.js",
   "scripts": {
@@ -13,7 +13,10 @@
     "type": "git",
     "url": "https://github.com/s-sasaki-0529/vue-better-picker"
   },
-  "keywords": [ "vue", "picker" ],
+  "keywords": [
+    "vue",
+    "picker"
+  ],
   "author": "shingo.sasaki <shingo.sasaki.0529@gmail.com> (https://www.shingo-sasaki.net/)",
   "license": "MIT",
   "bugs": {

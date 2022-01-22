@@ -1,5 +1,5 @@
 module.exports = {
-  framework: "@storybook/vue",
+  framework: "@storybook/vue3",
   core: {
     builder: "webpack5",
   },

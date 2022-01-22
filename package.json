@@ -11,7 +11,7 @@
   "author": "shingo.sasaki",
   "license": "MIT",
   "dependencies": {
-    "better-scroll": "^1.3.0",
+    "better-scroll": "^2.0.0",
     "vue": "^3.0.0"
   },
   "devDependencies": {

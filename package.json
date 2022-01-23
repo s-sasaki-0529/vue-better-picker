@@ -5,7 +5,6 @@
   "main": "dist/vue-3-better-picker.umd.js",
   "scripts": {
     "build": "vue-cli-service build --target lib src/main.js",
-    "deploy": "yarn build; npm publish",
     "lint": "eslint --ext .js,.ts,.vue src/**",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"

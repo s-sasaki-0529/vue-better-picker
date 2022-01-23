@@ -13,7 +13,7 @@
           <div class="picker-content">
             <div class="mask-top border-bottom-1px" />
             <div class="mask-bottom border-top-1px" />
-            <div ref="wheelWrapper" class="wheel-wrapper">
+            <div class="wheel-wrapper">
               <div v-for="(dataSet, i) in pickerData" :key="i" class="wheel">
                 <ul class="wheel-scroll">
                   <li v-for="(item, s) in dataSet" :key="s" class="wheel-item">
@@ -45,7 +45,7 @@ const EVENT_CHANGE = "change";
 export default {
   name: COMPONENT_NAME,
   props: {
-    data: {
+    modelValue: {
       type: Array,
       default() {
         return [];
@@ -77,15 +77,21 @@ export default {
   data() {
     return {
       state: STATE_HIDE,
-      pickerData: this.data.slice(),
+      pickerData: this.modelValue.slice(),
       pickerSelectedIndex: this.selectedIndex,
       pickerSelectedVal: [],
       pickerSelectedText: [],
+      dirty: false,
     };
   },
   watch: {
-    data(newData) {
-      this.setData(newData);
+    modelValue: {
+      handler(newData) {
+        console.log("year");
+        this.setData(newData);
+      },
+      immediate: true,
+      deep: true,
     },
   },
   created() {
@@ -147,7 +153,7 @@ export default {
       if (!this.wheels || this.dirty) {
         this.$nextTick(() => {
           this.wheels = [];
-          let wheelWrapper = this.$refs.wheelWrapper;
+          let wheelWrapper = this.$el.querySelector(".wheel-wrapper");
           for (let i = 0; i < this.pickerData.length; i++) {
             this._createWheel(wheelWrapper, i);
           }
@@ -189,12 +195,12 @@ export default {
         console.error("can not use refillColumn when picker is not show");
         return;
       }
-      const wheelWrapper = this.$refs.wheelWrapper;
+      const wheelWrapper = this.$el.querySelector(".wheel-wrapper");
       let scroll = wheelWrapper.children[index].querySelector(".wheel-scroll");
       let wheel = this.wheels[index];
       if (scroll && wheel) {
         let oldData = this.pickerData[index];
-        this.$set(this.pickerData, index, data);
+        this.pickerData[index] = data;
         let selectedIndex = wheel.getSelectedIndex();
         let dist = 0;
         if (oldData.length) {

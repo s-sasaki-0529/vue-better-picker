@@ -5,8 +5,8 @@ const customConfig = ({ config }) => {
     (rule) => rule.test.toString() === /\.css$/.toString()
   );
   config.module.rules[cssRuleIndex] = {
-    test: /\.(css|scss|stylus)$/,
-    use: ["style-loader", "css-loader", "stylus-loader"],
+    test: /\.(css|scss|scss)$/,
+    use: ["style-loader", "css-loader", "sass-loader"],
   };
   return config;
 };

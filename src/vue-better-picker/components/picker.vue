@@ -357,7 +357,7 @@ export default {
     height: 20px;
   }
 }
-.picker.picker-fade-enter,
+.picker.picker-fade-enter-from,
 .picker.picker-fade-leave-active {
   opacity: 0;
 }
@@ -365,7 +365,7 @@ export default {
 .picker.picker-fade-leave-active {
   transition: all 0.3s ease-in-out;
 }
-.picker .picker-panel.picker-move-enter,
+.picker .picker-panel.picker-move-enter-from,
 .picker .picker-panel.picker-move-leave-active {
   transform: translate3d(0, 273px, 0);
 }

@@ -2,9 +2,9 @@
   "name": "vue-3-better-picker",
   "version": "0.0.4",
   "description": "Mobile picker component for Vue 3",
-  "main": "dist/main.js",
+  "main": "dist/vue-3-better-picker.umd.js",
   "scripts": {
-    "build": "webpack",
+    "build": "vue-cli-service build --target lib src/main.js",
     "lint": "eslint --ext .js,.ts,.vue src/**",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
@@ -33,21 +33,19 @@
     "@storybook/builder-webpack5": "^6.4.0",
     "@storybook/manager-webpack5": "^6.4.0",
     "@storybook/vue3": "^6.4.0",
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/compiler-sfc": "^3.0.0",
     "babel-loader": "^8.2.3",
     "core-js": "^3.20.3",
     "css-loader": "^6.5.1",
     "eslint": "^8.7.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-vue": "^8.3.0",
-    "node-sass": "^7.0.1",
+    "node-sass": "^6.0.0",
     "prettier": "^2.5.1",
-    "sass-loader": "^12.4.0",
+    "sass-loader": "^10.0.0",
     "style-loader": "^3.3.1",
-    "url-loader": "^4.1.1",
-    "vue": "^3.0.0",
-    "vue-loader": "^16.0.0",
-    "vue-template-compiler": "^2.6.14",
-    "webpack": "^5.67.0",
-    "webpack-cli": "^4.9.1"
+    "vue": "^3.0.0"
   }
 }

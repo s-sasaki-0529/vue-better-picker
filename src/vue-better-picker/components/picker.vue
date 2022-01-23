@@ -87,7 +87,6 @@ export default {
   watch: {
     modelValue: {
       handler(newData) {
-        console.log("year");
         this.setData(newData);
       },
       immediate: true,

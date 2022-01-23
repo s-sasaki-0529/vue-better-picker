@@ -1,5 +1,3 @@
-const { VueLoaderPlugin } = require("vue-loader");
-
 const customConfig = ({ config }) => {
   const cssRuleIndex = config.module.rules.findIndex(
     (rule) => rule.test.toString() === /\.css$/.toString()

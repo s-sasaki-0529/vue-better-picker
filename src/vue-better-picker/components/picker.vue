@@ -221,7 +221,7 @@ export default {
         });
 
         this.wheels[i].on("scrollEnd", () => {
-          this.$emit("change", i, this.wheels[i].getSelectedIndex());
+          this.$emit("change", this.getWheelState());
         });
       } else {
         this.wheels[i].refresh();

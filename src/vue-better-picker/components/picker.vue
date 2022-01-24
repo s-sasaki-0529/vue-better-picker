@@ -33,14 +33,13 @@
 <script>
 import BScroll from "better-scroll";
 
-const COMPONENT_NAME = "picker";
 const EVENT_SELECT = "select";
 const EVENT_VALUE_CHANGE = "valuechange";
 const EVENT_CANCEL = "cancel";
 const EVENT_CHANGE = "change";
 
 export default {
-  name: COMPONENT_NAME,
+  name: "BetterPicker",
   props: {
     modelValue: {
       type: Boolean,

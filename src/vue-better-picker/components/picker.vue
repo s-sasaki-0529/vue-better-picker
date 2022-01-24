@@ -69,7 +69,7 @@ export default {
       default: false,
     },
   },
-  emits: ["update:modelValue", "select", "valueChange", "cancel", "change"],
+  emits: ["update:modelValue", "select", "cancel", "change"],
   data() {
     return {
       pickerData: this.data.slice(),
@@ -104,41 +104,25 @@ export default {
     }
   },
   methods: {
+    getWheelState() {
+      return this.pickerData.map((_, i) => {
+        const index = this.wheels[i].getSelectedIndex();
+        return {
+          index,
+          value: this.pickerData[i][index].value,
+          text: this.pickerData[i][index].text,
+        };
+      });
+    },
     confirm() {
-      if (!this._canConfirm()) {
-        return;
-      }
+      if (!this._canConfirm()) return;
 
-      let changed = false;
-      for (let i = 0; i < this.pickerData.length; i++) {
-        let index = this.wheels[i].getSelectedIndex();
-        this.pickerSelectedIndex[i] = index;
+      const wheelState = this.getWheelState();
+      this.pickerSelectedIndex = wheelState.map((state) => state.index);
+      this.pickerSelectedVal = wheelState.map((state) => state.value);
+      this.pickerSelectedText = wheelState.map((state) => state.text);
 
-        let value = null;
-        if (this.pickerData[i].length) {
-          value = this.pickerData[i][index].value;
-        }
-        if (this.pickerSelectedVal[i] !== value) {
-          changed = true;
-        }
-        this.pickerSelectedVal[i] = this.pickerData[i][index].value;
-        this.pickerSelectedText[i] = this.pickerData[i][index].text;
-      }
-      this.$emit(
-        "select",
-        this.pickerSelectedVal,
-        this.pickerSelectedIndex,
-        this.pickerSelectedText
-      );
-
-      if (changed) {
-        this.$emit(
-          "valueChange",
-          this.pickerSelectedVal,
-          this.pickerSelectedIndex,
-          this.pickerSelectedText
-        );
-      }
+      this.$emit("select", this.getWheelState());
       this.$emit("update:modelValue", false);
     },
     cancel() {

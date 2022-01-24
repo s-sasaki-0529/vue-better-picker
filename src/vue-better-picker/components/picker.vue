@@ -45,7 +45,7 @@ const EVENT_CHANGE = "change";
 export default {
   name: COMPONENT_NAME,
   props: {
-    modelValue: {
+    data: {
       type: Array,
       default() {
         return [];
@@ -77,7 +77,7 @@ export default {
   data() {
     return {
       state: STATE_HIDE,
-      pickerData: this.modelValue.slice(),
+      pickerData: this.data.slice(),
       pickerSelectedIndex: this.selectedIndex,
       pickerSelectedVal: [],
       pickerSelectedText: [],
@@ -85,7 +85,7 @@ export default {
     };
   },
   watch: {
-    modelValue: {
+    data: {
       handler(newData) {
         this.setData(newData);
       },

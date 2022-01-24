@@ -39,7 +39,7 @@ export const _1_Single = Template.bind({});
 _1_Single.args = {
   ...commonProps,
   title: "single",
-  modelValue: [commonData],
+  data: [commonData],
   selectedIndex: [12],
 };
 
@@ -47,7 +47,7 @@ export const _2_Double = Template.bind({});
 _2_Double.args = {
   ...commonProps,
   title: "double",
-  modelValue: [commonData, commonData],
+  data: [commonData, commonData],
   selectedIndex: [13, 14],
 };
 
@@ -55,6 +55,6 @@ export const _3_Triple = Template.bind({});
 _3_Triple.args = {
   ...commonProps,
   title: "triple",
-  modelValue: [commonData, commonData, commonData],
+  data: [commonData, commonData, commonData],
   selectedIndex: [12, 13, 14],
 };

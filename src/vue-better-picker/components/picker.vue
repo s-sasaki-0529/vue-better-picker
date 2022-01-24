@@ -142,7 +142,7 @@ export default {
       this.$emit("update:modelValue", false);
     },
     cancel() {
-      this.hide();
+      this.$emit("update:modelValue", false);
       this.$emit("cancel");
     },
     show() {

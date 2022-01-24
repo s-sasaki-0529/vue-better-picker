@@ -8,22 +8,15 @@ const Template = (args) => ({
   },
   template: `
     <div>
-      <button @click="show">Show</button>
+      <button @click="show = true">Show</button>
       <pre v-if="state">{{ state }}</pre>
-      <picker ref="picker" @select="(...result) => state = result" v-bind="args" />
+      <picker v-model="show" ref="picker" @select="(...result) => state = result" v-bind="args" />
     </div>
   `,
   data: () => ({
+    show: true,
     state: null,
   }),
-  mounted() {
-    this.show();
-  },
-  methods: {
-    show() {
-      this.$refs.picker.show();
-    },
-  },
 });
 
 const commonData = "abcdefghijklmnopqrstuvwxyz"

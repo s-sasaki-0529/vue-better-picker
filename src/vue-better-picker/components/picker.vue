@@ -1,8 +1,8 @@
 <template>
   <transition name="picker-fade">
-    <div v-show="state === 1" class="picker" @touchmove.prevent @click="cancel">
+    <div v-show="modelValue" class="picker" @touchmove.prevent @click="cancel">
       <transition name="picker-move">
-        <div v-show="state === 1" class="picker-panel" @click.stop>
+        <div v-show="modelValue" class="picker-panel" @click.stop>
           <div class="picker-choose border-bottom-1px">
             <span class="cancel" @click="cancel">{{ cancelTxt }}</span>
             <span class="confirm" @click="confirm">{{ confirmTxt }}</span>
@@ -33,9 +33,6 @@
 <script>
 import BScroll from "better-scroll";
 
-const STATE_HIDE = 0;
-const STATE_SHOW = 1;
-
 const COMPONENT_NAME = "picker";
 const EVENT_SELECT = "select";
 const EVENT_VALUE_CHANGE = "valuechange";
@@ -45,6 +42,10 @@ const EVENT_CHANGE = "change";
 export default {
   name: COMPONENT_NAME,
   props: {
+    modelValue: {
+      type: Boolean,
+      required: true,
+    },
     data: {
       type: Array,
       default() {
@@ -74,9 +75,9 @@ export default {
       default: false,
     },
   },
+  emits: ["update:modelValue"],
   data() {
     return {
-      state: STATE_HIDE,
       pickerData: this.data.slice(),
       pickerSelectedIndex: this.selectedIndex,
       pickerSelectedVal: [],
@@ -92,6 +93,13 @@ export default {
       immediate: true,
       deep: true,
     },
+    modelValue: {
+      handler(v) {
+        if (v) this.show();
+        else this.hide();
+      },
+      immediate: true,
+    },
   },
   created() {
     if (!this.pickerSelectedIndex.length) {
@@ -106,7 +114,6 @@ export default {
       if (!this._canConfirm()) {
         return;
       }
-      this.hide();
 
       let changed = false;
       for (let i = 0; i < this.pickerData.length; i++) {
@@ -138,17 +145,13 @@ export default {
           this.pickerSelectedText
         );
       }
+      this.$emit("update:modelValue", false);
     },
     cancel() {
       this.hide();
       this.$emit(EVENT_CANCEL);
     },
     show() {
-      if (this.state === STATE_SHOW) {
-        return;
-      }
-      this.state = STATE_SHOW;
-
       if (!this.wheels || this.dirty) {
         this.$nextTick(() => {
           this.wheels = [];
@@ -166,8 +169,6 @@ export default {
       }
     },
     hide() {
-      this.state = STATE_HIDE;
-
       for (let i = 0; i < this.pickerData.length; i++) {
         this.wheels[i].disable();
       }
@@ -190,7 +191,7 @@ export default {
       return ret;
     },
     refillColumn(index, data) {
-      if (this.state !== STATE_SHOW) {
+      if (!this.modelValue) {
         console.error("can not use refillColumn when picker is not show");
         return;
       }

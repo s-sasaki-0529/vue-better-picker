@@ -9,13 +9,27 @@ const Template = (args) => ({
   template: `
     <div>
       <button @click="show = true">Show</button>
-      <pre v-if="state">{{ state }}</pre>
-      <picker v-model="show" ref="picker" @select="(...result) => state = result" v-bind="args" />
+      <div>
+        <h2>change event parameter</h2>
+        <div>{{ currentValues }}</div>
+      </div>
+      <div>
+        <h2>select event parameter</h2>
+        <div>{{ selectedValues }}</div>
+      </div>
+
+      <picker
+        v-model="show"
+        @change="(index, value) => currentValues = { index ,value }"
+        @select="(...result) => selectedValues = result"
+        v-bind="args"
+      />
     </div>
   `,
   data: () => ({
     show: true,
-    state: null,
+    currentValues: null,
+    selectedValues: null,
   }),
 });
 

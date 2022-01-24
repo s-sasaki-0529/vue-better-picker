@@ -69,7 +69,7 @@ export default {
       default: false,
     },
   },
-  emits: ["update:modelValue", "select", "valuechange", "cancel", "change"],
+  emits: ["update:modelValue", "select", "valueChange", "cancel", "change"],
   data() {
     return {
       pickerData: this.data.slice(),
@@ -133,7 +133,7 @@ export default {
 
       if (changed) {
         this.$emit(
-          "valuechange",
+          "valueChange",
           this.pickerSelectedVal,
           this.pickerSelectedIndex,
           this.pickerSelectedText

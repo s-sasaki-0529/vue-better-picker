@@ -82,9 +82,10 @@ export default {
   watch: {
     data: {
       handler(newData) {
-        this.setData(newData);
+        this.refill(newData);
+        this.pickerData = newData.slice();
+        this.dirty = true;
       },
-      immediate: true,
       deep: true,
     },
     modelValue: {
@@ -150,10 +151,6 @@ export default {
       for (let i = 0; i < this.pickerData.length; i++) {
         this.wheels[i].disable();
       }
-    },
-    setData(data) {
-      this.pickerData = data.slice();
-      this.dirty = true;
     },
     setSelectedIndex(index) {
       this.pickerSelectedIndex = index;

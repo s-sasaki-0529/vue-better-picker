@@ -33,11 +33,6 @@
 <script>
 import BScroll from "better-scroll";
 
-const EVENT_SELECT = "select";
-const EVENT_VALUE_CHANGE = "valuechange";
-const EVENT_CANCEL = "cancel";
-const EVENT_CHANGE = "change";
-
 export default {
   name: "BetterPicker",
   props: {
@@ -74,7 +69,7 @@ export default {
       default: false,
     },
   },
-  emits: ["update:modelValue"],
+  emits: ["update:modelValue", "select", "valuechange", "cancel", "change"],
   data() {
     return {
       pickerData: this.data.slice(),
@@ -130,7 +125,7 @@ export default {
         this.pickerSelectedText[i] = this.pickerData[i][index].text;
       }
       this.$emit(
-        EVENT_SELECT,
+        "select",
         this.pickerSelectedVal,
         this.pickerSelectedIndex,
         this.pickerSelectedText
@@ -138,7 +133,7 @@ export default {
 
       if (changed) {
         this.$emit(
-          EVENT_VALUE_CHANGE,
+          "valuechange",
           this.pickerSelectedVal,
           this.pickerSelectedIndex,
           this.pickerSelectedText
@@ -148,7 +143,7 @@ export default {
     },
     cancel() {
       this.hide();
-      this.$emit(EVENT_CANCEL);
+      this.$emit("cancel");
     },
     show() {
       if (!this.wheels || this.dirty) {
@@ -242,7 +237,7 @@ export default {
         });
 
         this.wheels[i].on("scrollEnd", () => {
-          this.$emit(EVENT_CHANGE, i, this.wheels[i].getSelectedIndex());
+          this.$emit("change", i, this.wheels[i].getSelectedIndex());
         });
       } else {
         this.wheels[i].refresh();

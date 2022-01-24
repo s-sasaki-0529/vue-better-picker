@@ -1,4 +1,4 @@
-import picker from "./picker.vue";
+import picker from "../components/picker.vue";
 export default { title: "picker", component: picker };
 
 const Template = (args) => ({

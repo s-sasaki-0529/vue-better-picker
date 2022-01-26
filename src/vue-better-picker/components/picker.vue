@@ -249,8 +249,8 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-@import "../common/stylus/base.scss";
-@import "../common/stylus/variable.scss";
+@import "../styles/base.scss";
+@import "../styles/variable.scss";
 
 .picker {
   position: fixed;

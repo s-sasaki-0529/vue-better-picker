@@ -77,8 +77,8 @@ export default {
 |---|---|---|
 |modelValue|Array|Basic object for picker|
 |title|String|Text displayed in the top center|
-|cancelTxt|String|Cancel button text|
-|confirmTxt|Array|OK button text|
+|cancelText|String|Cancel button text|
+|confirmText|Array|OK button text|
 |selectedIndex|Array|Initial values of the selected state|
 
 ## Caution

@@ -38,8 +38,8 @@ const commonData = "abcdefghijklmnopqrstuvwxyz"
   .map((char) => ({ value: char, text: char.toUpperCase() }));
 
 const commonProps = {
-  cancelTxt: "cancel",
-  confirmTxt: "confirm",
+  cancelText: "cancel",
+  confirmText: "confirm",
 };
 
 export const _1_Single = Template.bind({});

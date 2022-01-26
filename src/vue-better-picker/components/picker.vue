@@ -1,20 +1,31 @@
 <template>
   <transition name="picker-fade">
-    <div v-show="modelValue" class="picker" @touchmove.prevent @click="cancel">
+    <div
+      v-show="props.modelValue"
+      class="picker"
+      @touchmove.prevent
+      @click="cancel"
+    >
       <transition name="picker-move">
-        <div v-show="modelValue" class="picker-panel" @click.stop>
+        <div v-show="props.modelValue" class="picker-panel" @click.stop>
           <div class="picker-choose border-bottom-1px">
-            <span class="cancel" @click="cancel">{{ cancelTxt }}</span>
-            <span class="confirm" @click="confirm">{{ confirmTxt }}</span>
+            <span class="cancel" @click="cancel">{{ props.cancelText }}</span>
+            <span class="confirm" @click="confirm">{{
+              props.confirmText
+            }}</span>
             <h1 class="picker-title">
-              {{ title }}
+              {{ props.title }}
             </h1>
           </div>
           <div class="picker-content">
             <div class="mask-top border-bottom-1px" />
             <div class="mask-bottom border-top-1px" />
-            <div class="wheel-wrapper">
-              <div v-for="(dataSet, i) in pickerData" :key="i" class="wheel">
+            <div ref="wheelWrapper" class="wheel-wrapper">
+              <div
+                v-for="(dataSet, i) in state.pickerData"
+                :key="i"
+                class="wheel"
+              >
                 <ul class="wheel-scroll">
                   <li v-for="(item, s) in dataSet" :key="s" class="wheel-item">
                     {{ item.text }}
@@ -30,209 +41,212 @@
   </transition>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent, nextTick, PropType, reactive, ref, watch } from "vue";
 import BScroll from "better-scroll";
 
-export default {
-  name: "BetterPicker",
+// FIXME: Move type definitions to different file
+type PickerData = WheelColumn[];
+type WheelColumn = WheelSlot[];
+type WheelSlot = { text: string; value: any }; // FIXME: any 消せると非常にうれしい
+type WheelState = { index: number } & WheelSlot;
+type ExpandedBScroll = BScroll & {
+  getSelectedIndex: () => number;
+};
+
+export default defineComponent({
   props: {
     modelValue: {
       type: Boolean,
       required: true,
     },
     data: {
-      type: Array,
-      default() {
-        return [];
-      },
+      type: Array as PropType<PickerData>,
+      required: true,
     },
     title: {
       type: String,
       required: true,
     },
-    cancelTxt: {
+    cancelText: {
       type: String,
-      default: "cancel",
+      default: "Cancel",
     },
-    confirmTxt: {
+    confirmText: {
       type: String,
-      default: "confirm",
+      default: "OK",
     },
     selectedIndex: {
-      type: Array,
-      default() {
+      type: Array as PropType<number[]>,
+      default: () => {
         return [];
       },
     },
-    value: {
-      type: Boolean,
-      default: false,
-    },
   },
   emits: ["update:modelValue", "select", "cancel", "change"],
-  data() {
-    return {
-      pickerData: this.data.slice(),
-      pickerSelectedIndex: this.selectedIndex,
-      pickerSelectedVal: [],
-      pickerSelectedText: [],
+  setup(props, { emit }) {
+    const wheelWrapper = ref<HTMLElement | null>(null);
+    const state = reactive({
+      pickerData: props.data,
+      pickerSelectedIndex: props.selectedIndex,
+      pickerSelectedVal: [] as WheelSlot["value"][],
+      pickerSelectedText: [] as WheelSlot["text"][],
+      wheels: [] as ExpandedBScroll[],
       dirty: false,
-    };
-  },
-  watch: {
-    data: {
-      handler(newData) {
-        this.refill(newData);
-        this.pickerData = newData.slice();
-        this.dirty = true;
+    });
+
+    watch(
+      () => props.data,
+      (newData) => {
+        refill(newData);
+        state.pickerData = newData;
+        state.dirty = true;
+      }
+    );
+
+    watch(
+      () => props.modelValue,
+      (newValue) => {
+        if (newValue) show();
+        else hide();
       },
-      deep: true,
-    },
-    modelValue: {
-      handler(v) {
-        if (v) this.show();
-        else this.hide();
-      },
-      immediate: true,
-    },
-  },
-  created() {
-    if (!this.pickerSelectedIndex.length) {
-      this.pickerSelectedIndex = [];
-      for (let i = 0; i < this.pickerData.length; i++) {
-        this.pickerSelectedIndex[i] = 0;
+      {
+        immediate: true,
+        deep: true,
+      }
+    );
+
+    if (!props.selectedIndex.length) {
+      state.pickerSelectedIndex = [];
+      for (let i = 0; i < state.pickerData.length; i++) {
+        state.pickerSelectedIndex[i] = 0;
       }
     }
-  },
-  methods: {
-    getWheelState() {
-      return this.pickerData.map((_, i) => {
-        const index = this.wheels[i].getSelectedIndex();
+
+    function getWheelState(): WheelState[] {
+      return state.pickerData.map((_, i) => {
+        const index = state.wheels[i].getSelectedIndex();
         return {
           index,
-          value: this.pickerData[i][index].value,
-          text: this.pickerData[i][index].text,
+          value: state.pickerData[i][index].value,
+          text: state.pickerData[i][index].text,
         };
       });
-    },
-    confirm() {
-      if (!this._canConfirm()) return;
+    }
 
-      const wheelState = this.getWheelState();
-      this.pickerSelectedIndex = wheelState.map((state) => state.index);
-      this.pickerSelectedVal = wheelState.map((state) => state.value);
-      this.pickerSelectedText = wheelState.map((state) => state.text);
+    function confirm() {
+      if (!canConfirm()) return;
 
-      this.$emit("select", this.getWheelState());
-      this.$emit("update:modelValue", false);
-    },
-    cancel() {
-      this.$emit("update:modelValue", false);
-      this.$emit("cancel");
-    },
-    show() {
-      if (!this.wheels || this.dirty) {
-        this.$nextTick(() => {
-          this.wheels = [];
-          let wheelWrapper = this.$el.querySelector(".wheel-wrapper");
-          for (let i = 0; i < this.pickerData.length; i++) {
-            this._createWheel(wheelWrapper, i);
+      const wheelState = getWheelState();
+      state.pickerSelectedIndex = wheelState.map((state) => state.index);
+      state.pickerSelectedVal = wheelState.map((state) => state.value);
+      state.pickerSelectedText = wheelState.map((state) => state.text);
+
+      emit("select", wheelState);
+      emit("update:modelValue", false);
+    }
+
+    function cancel() {
+      emit("update:modelValue", false);
+      emit("cancel");
+    }
+
+    function show() {
+      if (state.wheels.length === 0 || state.dirty) {
+        nextTick(() => {
+          for (let i = 0; i < state.pickerData.length; i++) {
+            createWheel(i);
           }
-          this.dirty = false;
+          state.dirty = false;
         });
       } else {
-        for (let i = 0; i < this.pickerData.length; i++) {
-          this.wheels[i].enable();
-          this.wheels[i].wheelTo(this.pickerSelectedIndex[i]);
+        for (let i = 0; i < state.pickerData.length; i++) {
+          state.wheels[i].enable();
+          state.wheels[i].wheelTo(state.pickerSelectedIndex[i]);
         }
       }
-    },
-    hide() {
-      for (let i = 0; i < this.pickerData.length; i++) {
-        this.wheels[i].disable();
+    }
+
+    function hide() {
+      for (let i = 0; i < state.pickerData.length; i++) {
+        state.wheels[i].disable();
       }
-    },
-    setSelectedIndex(index) {
-      this.pickerSelectedIndex = index;
-    },
-    refill(datas) {
-      let ret = [];
-      if (!datas.length) {
-        return ret;
-      }
-      datas.forEach((data, index) => {
-        ret[index] = this.refillColumn(index, data);
+    }
+
+    function refill(pickerData: PickerData) {
+      if (!pickerData.length) return;
+      pickerData.forEach((wheelColumn, index) => {
+        refillColumn(index, wheelColumn);
       });
-      return ret;
-    },
-    refillColumn(index, data) {
-      if (!this.modelValue) {
+    }
+
+    function refillColumn(index: number, wheelSlot: WheelColumn) {
+      if (!props.modelValue) {
         console.error("can not use refillColumn when picker is not show");
         return;
       }
-      const wheelWrapper = this.$el.querySelector(".wheel-wrapper");
-      let scroll = wheelWrapper.children[index].querySelector(".wheel-scroll");
-      let wheel = this.wheels[index];
-      if (scroll && wheel) {
-        let oldData = this.pickerData[index];
-        this.pickerData[index] = data;
-        let selectedIndex = wheel.getSelectedIndex();
-        let dist = 0;
-        if (oldData.length) {
-          let oldValue = oldData[selectedIndex].value;
-          for (let i = 0; i < data.length; i++) {
-            if (data[i].value === oldValue) {
-              dist = i;
-              break;
-            }
+
+      const wheelWrapperElement = wheelWrapper.value;
+      if (wheelWrapperElement === null)
+        throw new Error("wheel-wrapper not found.");
+
+      const scrollElement =
+        wheelWrapperElement.children[index].querySelector(".wheel-scroll");
+      if (!scrollElement) return;
+
+      const oldData = state.pickerData[index];
+      state.pickerData[index] = wheelSlot;
+
+      const selectedIndex = state.wheels[index].getSelectedIndex();
+      let dist = 0;
+      if (oldData.length) {
+        const oldValue = oldData[selectedIndex].value;
+        for (let i = 0; i < wheelSlot.length; i++) {
+          if (wheelSlot[i].value === oldValue) {
+            dist = i;
+            break;
           }
         }
-        this.pickerSelectedIndex[index] = dist;
-        this.$nextTick(() => {
-          // recreate wheel so that the wrapperHeight will be correct.
-          wheel = this._createWheel(wheelWrapper, index);
-          wheel.wheelTo(dist);
-        });
-        return dist;
       }
-    },
-    scrollTo(index, dist) {
-      const wheel = this.wheels[index];
-      this.pickerSelectedIndex[index] = dist;
-      wheel.wheelTo(dist);
-    },
-    refresh() {
-      setTimeout(() => {
-        this.wheels.forEach((wheel) => {
-          wheel.refresh();
-        });
-      }, 200);
-    },
-    _createWheel(wheelWrapper, i) {
-      if (!this.wheels[i]) {
-        this.wheels[i] = new BScroll(wheelWrapper.children[i], {
+      state.pickerSelectedIndex[index] = dist;
+      nextTick(() => {
+        state.wheels[index] = createWheel(index);
+        state.wheels[index].wheelTo(dist);
+      });
+    }
+
+    function createWheel(i: number) {
+      if (state.wheels[i]) {
+        state.wheels[i].refresh();
+        return state.wheels[i];
+      }
+
+      const wheelWrapperElement = wheelWrapper.value;
+      if (wheelWrapperElement === null)
+        throw new Error("wheel-wrapper element is not found.");
+      state.wheels[i] = new BScroll(
+        wheelWrapperElement.children[i] as HTMLElement,
+        {
           wheel: {
-            selectedIndex: this.pickerSelectedIndex[i],
+            selectedIndex: state.pickerSelectedIndex[i],
           },
           probeType: 3,
-        });
-
-        this.wheels[i].on("scrollEnd", () => {
-          this.$emit("change", this.getWheelState());
-        });
-      } else {
-        this.wheels[i].refresh();
-      }
-
-      return this.wheels[i];
-    },
-    _canConfirm() {
-      return this.wheels.every((wheel) => {
-        return !wheel.isInTransition;
+        }
+      );
+      state.wheels[i].on("scrollEnd", () => {
+        emit("change", getWheelState());
       });
-    },
+
+      return state.wheels[i];
+    }
+
+    function canConfirm() {
+      return state.wheels.every((wheel) => !wheel.isInTransition);
+    }
+
+    return { props, state, cancel, confirm, wheelWrapper };
   },
-};
+});
 </script>
 
 <style scoped lang="scss">

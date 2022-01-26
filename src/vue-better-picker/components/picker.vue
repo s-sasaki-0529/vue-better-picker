@@ -9,13 +9,9 @@
       <transition name="picker-move">
         <div v-show="props.modelValue" class="picker-panel" @click.stop>
           <div class="picker-choose border-bottom-1px">
-            <span class="cancel" @click="cancel">{{ props.cancelText }}</span>
-            <span class="confirm" @click="confirm">{{
-              props.confirmText
-            }}</span>
-            <h1 class="picker-title">
-              {{ props.title }}
-            </h1>
+            <span class="cancel" @click="cancel" v-text="props.cancelText" />
+            <span class="confirm" @click="confirm" v-text="props.confirmText" />
+            <h1 class="picker-title" v-text="props.title" />
           </div>
           <div class="picker-content">
             <div class="mask-top border-bottom-1px" />

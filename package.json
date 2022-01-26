@@ -24,7 +24,8 @@
   },
   "homepage": "https://github.com/s-sasaki-0529/vue-better-picker/blob/master/README.md",
   "dependencies": {
-    "better-scroll": "^2.0.0"
+    "@better-scroll/core": "^2.0.0",
+    "@better-scroll/wheel": "^2.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.16.10",

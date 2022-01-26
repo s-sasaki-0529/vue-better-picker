@@ -43,7 +43,9 @@
 
 <script lang="ts">
 import { defineComponent, nextTick, PropType, reactive, ref, watch } from "vue";
-import BScroll from "better-scroll";
+import BScroll from "@better-scroll/core";
+import Wheel from "@better-scroll/wheel";
+BScroll.use(Wheel);
 
 // FIXME: Move type definitions to different file
 type PickerData = WheelColumn[];

@@ -156,6 +156,7 @@ export default defineComponent({
     function show() {
       if (state.wheels.length === 0 || state.dirty) {
         nextTick(() => {
+          state.wheels = [];
           for (let i = 0; i < state.pickerData.length; i++) {
             createWheel(i);
           }

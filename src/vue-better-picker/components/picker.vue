@@ -167,6 +167,8 @@ export default defineComponent({
     }
 
     function hide() {
+      if (!state.wheels.length) return;
+
       for (let i = 0; i < state.pickerData.length; i++) {
         state.wheels[i].disable();
       }

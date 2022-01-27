@@ -2,27 +2,14 @@
   "name": "vue-3-better-picker",
   "version": "0.1.3",
   "description": "Mobile picker component for Vue 3",
-  "main": "dist/vue-3-better-picker.umd.js",
-  "scripts": {
-    "build": "vue-cli-service build --target lib src/main.js",
-    "lint": "eslint --ext .js,.ts,.vue src/**",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/s-sasaki-0529/vue-better-picker"
-  },
-  "keywords": [
-    "vue",
-    "picker"
-  ],
   "author": "shingo.sasaki <shingo.sasaki.0529@gmail.com> (https://www.shingo-sasaki.net/)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/s-sasaki-0529/vue-better-picker/issues"
+  "scripts": {
+    "build": "vue-cli-service build --target lib src/main.ts",
+    "lint": "eslint --ext .js,.ts,.vue src/**",
+    "build-storybook": "build-storybook",
+    "storybook": "start-storybook -p 6006"
   },
-  "homepage": "https://github.com/s-sasaki-0529/vue-better-picker/blob/master/README.md",
+  "main": "dist/vue-3-better-picker.umd.js",
   "dependencies": {
     "@better-scroll/core": "^2.0.0",
     "@better-scroll/wheel": "^2.0.0"
@@ -35,6 +22,7 @@
     "@storybook/manager-webpack5": "^6.4.0",
     "@storybook/vue3": "^6.4.0",
     "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-typescript": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
     "babel-loader": "^8.2.3",
@@ -50,5 +38,18 @@
     "style-loader": "^3.3.1",
     "typescript": "^4.5.5",
     "vue": "^3.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/s-sasaki-0529/vue-better-picker/issues"
+  },
+  "homepage": "https://github.com/s-sasaki-0529/vue-better-picker/blob/master/README.md",
+  "keywords": [
+    "vue",
+    "picker"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/s-sasaki-0529/vue-better-picker"
   }
 }

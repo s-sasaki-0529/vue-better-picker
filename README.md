@@ -20,45 +20,33 @@ $ yarn add vue-3-better-picker
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref } from "vue";
 import BetterPicker from "vue-3-better-picker";
 
-export default {
-  components: { BetterPicker },
-  data() {
-    return {
-      show: true,
-    };
-  },
-  computed: {
-    pickerData() {
-      return [
-        // left slot
-        [
-          { value: "a", text: "A" },
-          { value: "b", text: "B" },
-          { value: "c", text: "C" },
-        ],
-        // center slot
-        [
-          { value: "a", text: "A" },
-          { value: "b", text: "B" },
-          { value: "c", text: "C" },
-        ],
-        // right slot
-        [
-          { value: "a", text: "A" },
-          { value: "b", text: "B" },
-          { value: "c", text: "C" },
-        ],
-      ];
-    },
-  },
-  methods: {
-    onSelect(selectedValues) {
-      console.log(selectedValues);
-    },
-  },
+const show = ref(true);
+const pickerData = [
+  // left slot
+  [
+    { value: "a", text: "A" },
+    { value: "b", text: "B" },
+    { value: "c", text: "C" },
+  ],
+  // center slot
+  [
+    { value: "a", text: "A" },
+    { value: "b", text: "B" },
+    { value: "c", text: "C" },
+  ],
+  // right slot
+  [
+    { value: "a", text: "A" },
+    { value: "b", text: "B" },
+    { value: "c", text: "C" },
+  ],
+];
+const onSelect = (selectedValues) => {
+  console.log(selectedValues);
 };
 </script>
 ```

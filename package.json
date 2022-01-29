@@ -6,9 +6,7 @@
   "scripts": {
     "dev": "vue-cli-service serve dev/src/main.ts",
     "build": "vue-cli-service build --target lib src/main.ts",
-    "lint": "eslint --ext .js,.ts,.vue src/**",
-    "build-storybook": "build-storybook",
-    "storybook": "start-storybook -p 6006"
+    "lint": "eslint --ext .js,.ts,.vue src/**"
   },
   "main": "dist/vue-3-better-picker.umd.js",
   "dependencies": {
@@ -18,10 +16,6 @@
   "devDependencies": {
     "@babel/core": "^7.16.10",
     "@babel/preset-env": "^7.16.11",
-    "@storybook/addon-controls": "^6.4.0",
-    "@storybook/builder-webpack5": "^6.4.0",
-    "@storybook/manager-webpack5": "^6.4.0",
-    "@storybook/vue3": "^6.4.0",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-typescript": "~4.5.0",
     "@vue/cli-service": "~4.5.0",

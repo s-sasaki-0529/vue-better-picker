@@ -72,3 +72,13 @@ export default {
 |cancelText|String|Cancel button text|
 |confirmText|Array|OK button text|
 |selectedIndex|Array|Initial values of the selected state|
+
+## Contribution
+
+You can start developing immediately with the following command and open http://localhost:8080.
+
+```bash
+$ yarn dev
+```
+
+Please feel free to create a PR or Issue.

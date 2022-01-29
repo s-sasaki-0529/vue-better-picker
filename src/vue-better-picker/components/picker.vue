@@ -64,7 +64,7 @@ export default defineComponent({
     },
     title: {
       type: String,
-      required: true,
+      default: "Picker",
     },
     cancelText: {
       type: String,

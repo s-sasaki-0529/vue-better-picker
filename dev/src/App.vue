@@ -5,62 +5,75 @@
     <button @click="state.showTriple = true">Triple columns</button>
     <button @click="state.showAdvanced = true">Advanced(DatePicker)</button>
 
-    <Picker
-      v-model="state.showSingle"
-      title="Single"
-      confirmText="confirm"
-      cancelText="cancel"
-      :data="singleData"
-      :selectedIndex="[12]"
-      @change="(args) => (state.argsOfChangeEvent = args)"
-      @select="(args) => (state.argsOfSelectEvent = args)"
-    />
-    <Picker
-      v-model="state.showDouble"
-      title="Double"
-      confirmText="YES"
-      cancelText="NO"
-      :data="doubleData"
-      :selectedIndex="[13, 14]"
-      @change="(args) => (state.argsOfChangeEvent = args)"
-      @select="(args) => (state.argsOfSelectEvent = args)"
-    />
-    <Picker
-      v-model="state.showTriple"
-      title="Triple"
-      confirmText="確定"
-      cancelText="キャンセル"
-      :data="tripleData"
-      :selectedIndex="[12, 13, 14]"
-      @change="(args) => (state.argsOfChangeEvent = args)"
-      @select="(args) => (state.argsOfSelectEvent = args)"
-    />
-    <Picker
-      v-model="state.showAdvanced"
-      title="DatePicker"
-      :data="datePicker.state.data"
-      :selectedIndex="[12, 13, 14]"
-      @change="
-        (args) => {
-          datePicker.onChange(args);
-          state.argsOfChangeEvent = args;
-        }
-      "
-      @select="
-        (args) => {
-          datePicker.onSelect(args);
-          state.argsOfSelectEvent = args;
-        }
-      "
-    />
+    <div class="single-picker">
+      <Picker
+        v-model="state.showSingle"
+        title="Single"
+        confirmText="confirm"
+        cancelText="cancel"
+        :data="singleData"
+        @change="(args) => (state.argsOfChangeEvent = args)"
+        @select="(args) => (state.argsOfSelectEvent = args)"
+      />
+    </div>
+
+    <div class="double-picker">
+      <Picker
+        v-model="state.showDouble"
+        title="Double"
+        confirmText="YES"
+        cancelText="NO"
+        :data="doubleData"
+        :selectedIndex="[13, 14]"
+        @change="(args) => (state.argsOfChangeEvent = args)"
+        @select="(args) => (state.argsOfSelectEvent = args)"
+      />
+    </div>
+
+    <div class="triple-picker">
+      <Picker
+        v-model="state.showTriple"
+        title="Triple"
+        confirmText="確定"
+        cancelText="キャンセル"
+        :data="tripleData"
+        :selectedIndex="[12, 13, 14]"
+        @change="(args) => (state.argsOfChangeEvent = args)"
+        @select="(args) => (state.argsOfSelectEvent = args)"
+      />
+    </div>
+
+    <div class="advanced-picker">
+      <Picker
+        v-model="state.showAdvanced"
+        :data="datePicker.state.data"
+        :selectedIndex="[12, 0, 30]"
+        @change="
+          (args) => {
+            datePicker.onChange(args);
+            state.argsOfChangeEvent = args;
+          }
+        "
+        @select="
+          (args) => {
+            datePicker.onSelect(args);
+            state.argsOfSelectEvent = args;
+          }
+        "
+      />
+    </div>
 
     <div>
       <h2>Arguments of the change event</h2>
-      <div class="args-of-change-event">{{ state.argsOfChangeEvent }}</div>
+      <div class="args-of-change-event">
+        {{ JSON.stringify(state.argsOfChangeEvent) }}
+      </div>
     </div>
     <div>
       <h2>Arguments of the select event</h2>
-      <div class="args-of-select-event">{{ state.argsOfSelectEvent }}</div>
+      <div class="args-of-select-event">
+        {{ JSON.stringify(state.argsOfSelectEvent) }}
+      </div>
     </div>
   </div>
 </template>

@@ -30,8 +30,8 @@ export default function useDatePicker() {
 
     return [
       years.map((year) => ({ value: year, text: year.toString() })),
-      months.map((month) => ({ value: month, text: month.toString() })),
-      days.map((day) => ({ value: day, text: day.toString() })),
+      months.map((month) => ({ value: month, text: ("00" + month).slice(-2) })),
+      days.map((day) => ({ value: day, text: ("00" + day).slice(-2) })),
     ];
   };
 
@@ -39,7 +39,7 @@ export default function useDatePicker() {
     selectedYear: null as number | null,
     selectedMonth: null as number | null,
     selectedDay: null as number | null,
-    data: generatePickerData(2020, 6),
+    data: generatePickerData(2020, 8),
   });
 
   function onChange(newData: typeof state["data"][0]) {

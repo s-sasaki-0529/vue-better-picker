@@ -87,5 +87,3 @@ describe("vue-3-better-picker", () => {
     cy.get(".picker").should("not.be.visible");
   });
 });
-
-// describe("Emits", () => {

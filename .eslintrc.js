@@ -1,13 +1,18 @@
 module.exports = {
-  env: {
-    browser: true,
-    node: true,
-    es2021: true,
-  },
-  plugins: ["vue"],
+  root: true,
   extends: [
     "eslint:recommended",
     "plugin:vue/vue3-recommended",
-    "eslint-config-prettier",
+    "@vue/typescript",
+    "plugin:prettier/recommended",
   ],
+  parser: "vue-eslint-parser",
+  env: {
+    browser: true,
+    node: true,
+  },
+  rules: {
+    "vue/attribute-hyphenation": "off",
+    "vue/multi-word-component-names": "off",
+  },
 };

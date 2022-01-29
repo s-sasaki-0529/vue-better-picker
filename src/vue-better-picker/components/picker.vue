@@ -157,6 +157,7 @@ export default defineComponent({
             createWheel(i);
           }
           state.dirty = false;
+          emit("change", getWheelState());
         });
       } else {
         for (let i = 0; i < state.pickerData.length; i++) {

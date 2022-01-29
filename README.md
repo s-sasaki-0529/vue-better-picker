@@ -4,6 +4,12 @@
 
 Mobile picker component for Vue 3 that forked from [openfe-openfe/vue-better-picker](https://github.com/openfe-openfe/vue-better-picker).
 
+## Demo
+
+Open [Demo App](https://vue-3-better-picker.netlify.app/) or scan the QR code below with your mobile device.
+
+![QR_455628](https://user-images.githubusercontent.com/16274215/151659196-03d134aa-6915-4694-bee9-f7a02c13e810.png)
+
 ## Install
 
 ```bash

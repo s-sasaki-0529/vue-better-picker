@@ -4,6 +4,7 @@
   "description": "Mobile picker component for Vue 3",
   "author": "shingo.sasaki <shingo.sasaki.0529@gmail.com> (https://www.shingo-sasaki.net/)",
   "scripts": {
+    "dev": "vue-cli-service serve dev/src/main.ts",
     "build": "vue-cli-service build --target lib src/main.ts",
     "lint": "eslint --ext .js,.ts,.vue src/**",
     "build-storybook": "build-storybook",

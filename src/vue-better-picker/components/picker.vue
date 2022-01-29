@@ -1,11 +1,6 @@
 <template>
   <transition name="picker-fade">
-    <div
-      v-show="props.modelValue"
-      class="picker"
-      @touchmove.prevent
-      @click="cancel"
-    >
+    <div v-show="props.modelValue" class="picker" @touchmove.prevent @click="cancel">
       <transition name="picker-move">
         <div v-show="props.modelValue" class="picker-panel" @click.stop>
           <div class="picker-choose border-bottom-1px">
@@ -17,11 +12,7 @@
             <div class="mask-top border-bottom-1px" />
             <div class="mask-bottom border-top-1px" />
             <div ref="wheelWrapper" class="wheel-wrapper">
-              <div
-                v-for="(dataSet, i) in state.pickerData"
-                :key="i"
-                class="wheel"
-              >
+              <div v-for="(dataSet, i) in state.pickerData" :key="i" class="wheel">
                 <ul class="wheel-scroll">
                   <li v-for="(item, s) in dataSet" :key="s" class="wheel-item">
                     {{ item.text }}
@@ -189,11 +180,9 @@ export default defineComponent({
       }
 
       const wheelWrapperElement = wheelWrapper.value;
-      if (wheelWrapperElement === null)
-        throw new Error("wheel-wrapper not found.");
+      if (wheelWrapperElement === null) throw new Error("wheel-wrapper not found.");
 
-      const scrollElement =
-        wheelWrapperElement.children[index].querySelector(".wheel-scroll");
+      const scrollElement = wheelWrapperElement.children[index].querySelector(".wheel-scroll");
       if (!scrollElement) return;
 
       const oldData = state.pickerData[index];
@@ -224,17 +213,13 @@ export default defineComponent({
       }
 
       const wheelWrapperElement = wheelWrapper.value;
-      if (wheelWrapperElement === null)
-        throw new Error("wheel-wrapper element is not found.");
-      state.wheels[i] = new BScroll(
-        wheelWrapperElement.children[i] as HTMLElement,
-        {
-          wheel: {
-            selectedIndex: state.pickerSelectedIndex[i],
-          },
-          probeType: 3,
-        }
-      );
+      if (wheelWrapperElement === null) throw new Error("wheel-wrapper element is not found.");
+      state.wheels[i] = new BScroll(wheelWrapperElement.children[i] as HTMLElement, {
+        wheel: {
+          selectedIndex: state.pickerSelectedIndex[i],
+        },
+        probeType: 3,
+      });
       state.wheels[i].on("scrollEnd", () => {
         emit("change", getWheelState());
       });
@@ -305,20 +290,12 @@ export default defineComponent({
       .mask-top {
         position: absolute;
         top: 0;
-        background: linear-gradient(
-          to top,
-          rgba(255, 255, 255, 0.4),
-          rgba(255, 255, 255, 0.8)
-        );
+        background: linear-gradient(to top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.8));
       }
       .mask-bottom {
         position: absolute;
         bottom: 1px;
-        background: linear-gradient(
-          to bottom,
-          rgba(255, 255, 255, 0.4),
-          rgba(255, 255, 255, 0.8)
-        );
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.8));
       }
     }
     .wheel-wrapper {

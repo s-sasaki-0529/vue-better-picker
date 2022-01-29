@@ -50,10 +50,10 @@ $color-grey-greenyellow: #d5e08c;
 $color-dark-deepgreen: #1b733e;
 $color-light-deepgreen: #50a050;
 $color-grey-deepgreen: #80c075;
-$color-green: #75D370;
-$color-green-opacity: rgba(117, 211, 112, .05);
+$color-green: #75d370;
+$color-green-opacity: rgba(117, 211, 112, 0.05);
 $color-vue-green: #42b983;
-$color-vue-green-opacity: rgba(66, 185, 131, .05);
+$color-vue-green-opacity: rgba(66, 185, 131, 0.05);
 
 $color-dark-cyan: #018172;
 $color-light-cyan: #28aa91;
@@ -71,15 +71,15 @@ $color-row-line: #ebebeb;
 $color-col-line: #f5f5f5;
 
 /// click & touch active background-color
-$color-active-light-orange: rgba(252, 145, 83, .04);
-$color-active-light-gray: rgba(0, 0, 0, .04);
+$color-active-light-orange: rgba(252, 145, 83, 0.04);
+$color-active-light-gray: rgba(0, 0, 0, 0.04);
 
 /// click & touch active color
 $color-active-light-orange-fe: #fdc2a5;
 $color-active-light-gray-fe: #c2c2c2;
 
 /// mask background-color
-$color-mask-bgc: rgba(37, 38, 45, .4);
+$color-mask-bgc: rgba(37, 38, 45, 0.4);
 
 // Font Size
 $fontsize-large-xxxx: 30px;
@@ -96,4 +96,4 @@ $radius-size-medium: 0.3rem;
 $radius-size-small: 0.1rem;
 
 /// content shadow
-$box-shadow-content: 0 1px 3px rgba(0, 0, 0, .1);
+$box-shadow-content: 0 1px 3px rgba(0, 0, 0, 0.1);

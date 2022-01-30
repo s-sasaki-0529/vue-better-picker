@@ -1,4 +1,4 @@
-import { reactive } from "vue";
+import { reactive } from "vue-demi";
 
 export default function useDatePicker() {
   const generateYears = (minYear = 2010) => {

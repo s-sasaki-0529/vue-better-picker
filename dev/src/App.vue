@@ -79,8 +79,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "@vue/runtime-core";
-import { reactive } from "vue";
+import { defineComponent } from "vue-demi";
+import { reactive } from "vue-demi";
 import Picker from "../../src/vue-better-picker/components/picker.vue";
 import useDatePicker from "./useDatePicker";
 

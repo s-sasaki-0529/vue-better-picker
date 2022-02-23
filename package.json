@@ -45,7 +45,7 @@
   "bugs": {
     "url": "https://github.com/s-sasaki-0529/vue-better-picker/issues"
   },
-  "homepage": "https://github.com/s-sasaki-0529/vue-better-picker/blob/master/README.md",
+  "homepage": "https://github.com/s-sasaki-0529/vue-better-picker/blob/vue3/README.md",
   "keywords": [
     "vue",
     "picker"

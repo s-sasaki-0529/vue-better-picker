@@ -65,15 +65,11 @@
 
     <div>
       <h2>Arguments of the change event</h2>
-      <div class="args-of-change-event">
-        {{ JSON.stringify(state.argsOfChangeEvent) }}
-      </div>
+      <div class="args-of-change-event">{{ JSON.stringify(state.argsOfChangeEvent) }}</div>
     </div>
     <div>
       <h2>Arguments of the select event</h2>
-      <div class="args-of-select-event">
-        {{ JSON.stringify(state.argsOfSelectEvent) }}
-      </div>
+      <div class="args-of-select-event">{{ JSON.stringify(state.argsOfSelectEvent) }}</div>
     </div>
   </div>
 </template>

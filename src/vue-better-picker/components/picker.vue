@@ -1,8 +1,8 @@
 <template>
   <transition name="picker-fade">
-    <div v-show="props.modelValue" class="picker" @touchmove.prevent @click="cancel">
+    <div v-show="props.value" class="picker" @touchmove.prevent @click="cancel">
       <transition name="picker-move">
-        <div v-show="props.modelValue" class="picker-panel" @click.stop>
+        <div v-show="props.value" class="picker-panel" @click.stop>
           <div class="picker-choose border-bottom-1px">
             <span class="cancel" @click="cancel" v-text="props.cancelText" />
             <span class="confirm" @click="confirm" v-text="props.confirmText" />
@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, nextTick, PropType, reactive, ref, watch } from "vue";
+import { defineComponent, nextTick, PropType, reactive, ref, watch } from "@vue/composition-api";
 import BScroll from "@better-scroll/core";
 import Wheel from "@better-scroll/wheel";
 BScroll.use(Wheel);
@@ -45,7 +45,7 @@ type ExpandedBScroll = BScroll & {
 
 export default defineComponent({
   props: {
-    modelValue: {
+    value: {
       type: Boolean,
       required: true,
     },
@@ -72,7 +72,7 @@ export default defineComponent({
       },
     },
   },
-  emits: ["update:modelValue", "select", "cancel", "change"],
+  emits: ["input", "select", "cancel", "change"],
   setup(props, { emit }) {
     const wheelWrapper = ref<HTMLElement | null>(null);
     const state = reactive({
@@ -94,7 +94,7 @@ export default defineComponent({
     );
 
     watch(
-      () => props.modelValue,
+      () => props.value,
       (newValue) => {
         if (newValue) show();
         else hide();
@@ -132,11 +132,11 @@ export default defineComponent({
       state.pickerSelectedText = wheelState.map((state) => state.text);
 
       emit("select", wheelState);
-      emit("update:modelValue", false);
+      emit("input", false);
     }
 
     function cancel() {
-      emit("update:modelValue", false);
+      emit("input", false);
       emit("cancel");
     }
 
@@ -174,7 +174,7 @@ export default defineComponent({
     }
 
     function refillColumn(index: number, wheelSlot: WheelColumn) {
-      if (!props.modelValue) {
+      if (!props.value) {
         console.error("can not use refillColumn when picker is not show");
         return;
       }

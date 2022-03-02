@@ -1,12 +1,12 @@
-# This Branch is WIP
+# This branch is for Vue 2 Only
+
+If you want to use it with Vue 3, please check the [vue3](https://github.com/s-sasaki-0529/vue-better-picker/tree/vue3) branch.
 
 # vue-better-picker
 
 ![image](https://user-images.githubusercontent.com/16274215/150684460-256048c4-fce5-4550-88b8-ee0f1060e07d.png)
 
 Mobile picker component for Vue 2 that forked from [openfe-openfe/vue-better-picker](https://github.com/openfe-openfe/vue-better-picker).
-
-If you want to use it with Vue 3, please check the [vue3](https://github.com/s-sasaki-0529/vue-better-picker/tree/vue3) branch.
 
 ## Demo
 
@@ -21,13 +21,6 @@ $ yarn add vue-2-better-picker
 # npm install vue-2-better-picker --save
 ```
 
-and `@vue/composition-api` is required by this package.
-
-```bash
-$ yarn add @vue/composition-api
-# npm install @vue/composition-api --save
-```
-
 ## Usage
 
 ```vue
@@ -38,7 +31,7 @@ $ yarn add @vue/composition-api
 </template>
 
 <script>
-import BetterPicker from "vue-3-better-picker";
+import BetterPicker from "vue-2-better-picker";
 
 export default {
   components: {

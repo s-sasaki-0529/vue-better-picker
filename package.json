@@ -13,8 +13,7 @@
   "main": "dist/vue-2-better-picker.common.js",
   "dependencies": {
     "@better-scroll/core": "^2.0.0",
-    "@better-scroll/wheel": "^2.0.0",
-    "vue-template-compiler": "^2.6.14"
+    "@better-scroll/wheel": "^2.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.16.10",
@@ -41,7 +40,8 @@
     "start-server-and-test": "^1.14.0",
     "style-loader": "^3.3.1",
     "typescript": "^4.5.5",
-    "vue": "^2.0.0"
+    "vue": "^2.0.0",
+    "vue-template-compiler": "^2.6.14"
   },
   "bugs": {
     "url": "https://github.com/s-sasaki-0529/vue-better-picker/issues"

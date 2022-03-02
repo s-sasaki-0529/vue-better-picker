@@ -1,6 +1,6 @@
 {
   "name": "vue-2-better-picker",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Mobile picker component for Vue 2",
   "author": "shingo.sasaki <shingo.sasaki.0529@gmail.com> (https://www.shingo-sasaki.net/)",
   "scripts": {
@@ -11,7 +11,9 @@
     "cy:run": "cypress run"
   },
   "main": "dist/vue-2-better-picker.common.js",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@better-scroll/core": "^2.0.0",
     "@better-scroll/wheel": "^2.0.0"

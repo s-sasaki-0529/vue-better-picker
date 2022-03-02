@@ -11,6 +11,7 @@
     "cy:run": "cypress run"
   },
   "main": "dist/vue-3-better-picker.umd.min.js",
+  "files": ["dist"],
   "dependencies": {
     "@better-scroll/core": "^2.0.0",
     "@better-scroll/wheel": "^2.0.0"

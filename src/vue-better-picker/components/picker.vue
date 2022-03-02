@@ -28,20 +28,11 @@
   </transition>
 </template>
 
-<script lang="ts">
-import { defineComponent, nextTick, PropType, reactive, ref, watch } from "@vue/composition-api";
+<script>
+import { defineComponent, nextTick, reactive, ref, watch } from "@vue/composition-api";
 import BScroll from "@better-scroll/core";
 import Wheel from "@better-scroll/wheel";
 BScroll.use(Wheel);
-
-// FIXME: Move type definitions to different file
-type PickerData = WheelColumn[];
-type WheelColumn = WheelSlot[];
-type WheelSlot = { text: string; value: any }; // FIXME: any 消せると非常にうれしい
-type WheelState = { index: number } & WheelSlot;
-type ExpandedBScroll = BScroll & {
-  getSelectedIndex: () => number;
-};
 
 export default defineComponent({
   props: {
@@ -50,7 +41,7 @@ export default defineComponent({
       required: true,
     },
     data: {
-      type: Array as PropType<PickerData>,
+      type: Array,
       required: true,
     },
     title: {
@@ -66,7 +57,7 @@ export default defineComponent({
       default: "OK",
     },
     selectedIndex: {
-      type: Array as PropType<number[]>,
+      type: Array,
       default: () => {
         return [];
       },
@@ -74,13 +65,13 @@ export default defineComponent({
   },
   emits: ["input", "select", "cancel", "change"],
   setup(props, { emit }) {
-    const wheelWrapper = ref<HTMLElement | null>(null);
+    const wheelWrapper = ref(null);
     const state = reactive({
       pickerData: props.data,
       pickerSelectedIndex: props.selectedIndex,
-      pickerSelectedVal: [] as WheelSlot["value"][],
-      pickerSelectedText: [] as WheelSlot["text"][],
-      wheels: [] as ExpandedBScroll[],
+      pickerSelectedVal: [],
+      pickerSelectedText: [],
+      wheels: [],
       dirty: false,
     });
 
@@ -112,7 +103,7 @@ export default defineComponent({
       }
     }
 
-    function getWheelState(): WheelState[] {
+    function getWheelState() {
       return state.pickerData.map((_, i) => {
         const index = state.wheels[i].getSelectedIndex();
         return {
@@ -166,14 +157,14 @@ export default defineComponent({
       }
     }
 
-    function refill(pickerData: PickerData) {
+    function refill(pickerData) {
       if (!pickerData.length) return;
       pickerData.forEach((wheelColumn, index) => {
         refillColumn(index, wheelColumn);
       });
     }
 
-    function refillColumn(index: number, wheelSlot: WheelColumn) {
+    function refillColumn(index, wheelSlot) {
       if (!props.value) {
         console.error("can not use refillColumn when picker is not show");
         return;
@@ -206,7 +197,7 @@ export default defineComponent({
       });
     }
 
-    function createWheel(i: number) {
+    function createWheel(i) {
       if (state.wheels[i]) {
         state.wheels[i].refresh();
         return state.wheels[i];
@@ -214,7 +205,7 @@ export default defineComponent({
 
       const wheelWrapperElement = wheelWrapper.value;
       if (wheelWrapperElement === null) throw new Error("wheel-wrapper element is not found.");
-      state.wheels[i] = new BScroll(wheelWrapperElement.children[i] as HTMLElement, {
+      state.wheels[i] = new BScroll(wheelWrapperElement.children[i], {
         wheel: {
           selectedIndex: state.pickerSelectedIndex[i],
         },

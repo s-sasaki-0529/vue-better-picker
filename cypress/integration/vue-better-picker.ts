@@ -20,7 +20,10 @@ describe("vue-3-better-picker", () => {
   it("reflects the default selection prop", () => {
     cy.get("button:contains(Single)").click();
 
-    cy.get(".args-of-change-event").should("have.text", '[{"index":0,"value":"a","text":"A"}]');
+    cy.get(".args-of-change-event").should(
+      "have.text",
+      '{"column":null,"state":[{"index":0,"value":"a","text":"A"}]}'
+    );
   });
 
   it("reflects the specified selection prop", () => {
@@ -28,7 +31,7 @@ describe("vue-3-better-picker", () => {
 
     cy.get(".args-of-change-event").should(
       "have.text",
-      '[{"index":13,"value":"n","text":"N"},{"index":14,"value":"o","text":"O"}]'
+      '{"column":null,"state":[{"index":13,"value":"n","text":"N"},{"index":14,"value":"o","text":"O"}]}'
     );
   });
 
@@ -38,12 +41,12 @@ describe("vue-3-better-picker", () => {
     // When switch from 31 January to February, auto switching to 1 February
     cy.get(".args-of-change-event").should(
       "have.text",
-      '[{"index":12,"value":2022,"text":"2022"},{"index":0,"value":1,"text":"01"},{"index":30,"value":31,"text":"31"}]'
+      '{"column":null,"state":[{"index":12,"value":2022,"text":"2022"},{"index":0,"value":1,"text":"01"},{"index":30,"value":31,"text":"31"}]}'
     );
     cy.get(".advanced-picker .wheel:eq(1) .wheel-item:contains(02)").click({ force: true });
     cy.get(".args-of-change-event").should(
       "have.text",
-      '[{"index":12,"value":2022,"text":"2022"},{"index":1,"value":2,"text":"02"},{"index":0,"value":1,"text":"01"}]'
+      '{"column":2,"state":[{"index":12,"value":2022,"text":"2022"},{"index":1,"value":2,"text":"02"},{"index":0,"value":1,"text":"01"}]}'
     );
   });
 
@@ -54,7 +57,7 @@ describe("vue-3-better-picker", () => {
     cy.get(".double-picker .wheel:eq(1) .wheel-item:contains(C)").click({ force: true });
     cy.get(".args-of-change-event").should(
       "have.text",
-      '[{"index":15,"value":"p","text":"P"},{"index":2,"value":"c","text":"C"}]'
+      '{"column":1,"state":[{"index":15,"value":"p","text":"P"},{"index":2,"value":"c","text":"C"}]}'
     );
     cy.get(".args-of-select-event").should("have.text", "{}");
     cy.get(".picker").should("be.visible");

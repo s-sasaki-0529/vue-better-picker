@@ -148,7 +148,7 @@ export default defineComponent({
             createWheel(i);
           }
           state.dirty = false;
-          emit("change", getWheelState());
+          emit("change", { column: null, state: getWheelState() });
         });
       } else {
         for (let i = 0; i < state.pickerData.length; i++) {
@@ -221,7 +221,7 @@ export default defineComponent({
         probeType: 3,
       });
       state.wheels[i].on("scrollEnd", () => {
-        emit("change", getWheelState());
+        emit("change", { column: i, state: getWheelState() });
       });
 
       return state.wheels[i];

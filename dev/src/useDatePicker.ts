@@ -42,9 +42,9 @@ export default function useDatePicker() {
     data: generatePickerData(2020, 8),
   });
 
-  function onChange(newData: typeof state["data"][0]) {
-    const year = newData[0].value;
-    const month = newData[1].value;
+  function onChange(args: { column: number; state: typeof state["data"][0] }) {
+    const year = args.state[0].value;
+    const month = args.state[1].value;
     if (year !== state.selectedYear || month !== state.selectedMonth) {
       state.data = generatePickerData(year, month);
     }

@@ -82,7 +82,7 @@ export default {
 |value|Array|Basic object for picker (Usually bound by v-model)|
 |title|String|Text displayed in the top center|
 |cancelText|String|Cancel button text|
-|confirmText|Array|OK button text|
+|confirmText|String|OK button text|
 |selectedIndex|Array|Initial values of the selected state|
 
 ## Contribution

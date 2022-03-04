@@ -135,7 +135,7 @@ export default {
             this.createWheel(i);
           }
           this.dirty = false;
-          this.$emit("change", this.getWheelState());
+          this.$emit("change", { column: null, state: this.getWheelState() });
         });
       } else {
         for (let i = 0; i < this.pickerData.length; i++) {
@@ -204,7 +204,7 @@ export default {
         probeType: 3,
       });
       this.wheels[i].on("scrollEnd", () => {
-        this.$emit("change", this.getWheelState());
+        this.$emit("change", { column: i, state: this.getWheelState() });
       });
 
       return this.wheels[i];

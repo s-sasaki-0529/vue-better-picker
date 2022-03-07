@@ -283,6 +283,7 @@ export default {
       padding: 0 16px;
       justify-content: space-around;
       .wheel {
+        width: 100%;
         height: 173px;
         overflow: hidden;
         font-size: $fontsize-large-xx;

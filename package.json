@@ -1,6 +1,6 @@
 {
   "name": "vue-3-better-picker",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "Mobile picker component for Vue 3",
   "author": "shingo.sasaki <shingo.sasaki.0529@gmail.com> (https://www.shingo-sasaki.net/)",
   "scripts": {
